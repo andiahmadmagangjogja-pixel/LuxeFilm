@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import api from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Lock, Mail, Loader2, ArrowLeft } from "lucide-react";
 
@@ -19,10 +20,10 @@ export default function LoginAdmin() {
       setLoading(true);
       setError("");
 
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        { email, password }
-      );
+      const res = await api.post("/auth/login", {
+  email,
+  password,
+});
 
       // ✅ Core Logic: simpan token
       localStorage.setItem("token", res.data.token);
